@@ -81,3 +81,18 @@ app.delete("/leads/:id", async (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log("Server running on port 5000");
 });
+
+app.get("/db-test", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT NOW()");
+    res.json({
+      status: "DB Working ✅",
+      time: result.rows[0]
+    });
+  } catch (err) {
+    res.json({
+      status: "DB Failed ❌",
+      error: err.message
+    });
+  }
+});

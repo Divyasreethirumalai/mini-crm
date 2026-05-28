@@ -7,6 +7,7 @@ function App() {
   const [phone, setPhone] = useState("");
   const [source, setSource] = useState("Call");
   const [leads, setLeads] = useState([]);
+  const [search, setSearch] = useState("");
 
   // Fetch leads
   const fetchLeads = async () => {
@@ -73,6 +74,24 @@ function App() {
     <div className="container">
       <h1>Mini CRM</h1>
 
+      <div className="dashboard">
+      <div className="dashboard-card">
+        <p>Total Leads</p>
+        <h2>{leads.length}</h2>
+      </div>
+
+      <div className="dashboard-card">
+         <p>Converted Leads</p>
+         <h2>
+          {
+            leads.filter(
+              (lead) => lead.status === "Converted"
+            ).length
+          }
+          </h2>
+      </div>
+      </div>
+
       <div className="form">
         <input
           type="text"
@@ -97,8 +116,20 @@ function App() {
         <button onClick={addLead}>Add Lead</button>
       </div>
 
+      <div className="search">
+        <input
+        type="text"
+        placeholder="Search by name..."
+        onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
       <div className="leads">
-        {leads.map((lead) => (
+        {leads
+          .filter((lead) =>
+            lead.name.toLowerCase().includes(search.toLowerCase())
+          )
+          .map((lead) => (
           <div className="card" key={lead.id}>
             <h3>{lead.name}</h3>
 

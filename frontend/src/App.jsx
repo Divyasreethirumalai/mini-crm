@@ -14,7 +14,7 @@ function App() {
     try {
       setLoading(true);
 
-      const res = await axios.get("http://localhost:5000/leads");
+      const res = await axios.get("https://mini-crm-backend-3ut1.onrender.com/leads");
 
       setLeads(res.data);
     } catch (err) {
@@ -40,7 +40,7 @@ function App() {
     }
 
     try {
-      await axios.post("http://localhost:5000/leads", {
+      await axios.post("https://mini-crm-backend-3ut1.onrender.com/leads", {
         name,
         phone,
         source,
@@ -57,7 +57,7 @@ function App() {
 
   const updateStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/leads/${id}`, {
+      await axios.put(`https://mini-crm-backend-3ut1.onrender.com/leads/${id}`, {
         status,
       });
 
@@ -75,7 +75,7 @@ function App() {
 
       if (!confirmDelete) return;
 
-      await axios.delete(`http://localhost:5000/leads/${id}`);
+      await axios.delete(`https://mini-crm-backend-3ut1.onrender.com/leads/${id}`);
 
       fetchLeads();
     } catch (err) {
